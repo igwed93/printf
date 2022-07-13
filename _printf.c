@@ -8,11 +8,8 @@
  */
 int _printf(const char *format, ...)
 {
-	int value = 0;
-	int count  = 0;
-	int i = 0;
+	int count = 0;
 	va_list args;
-	int (*f)(va_list);
 
 	va_start(args, format);
 
@@ -21,51 +18,8 @@ int _printf(const char *format, ...)
 		return (-1);
 
 	/* Print each character of string */
-	while (format[i])
-	{
-		if (format[i] != '%')
-		{
-			value = write(1, &format[i], 1);
-			count += value;
-			i++;
-			continue;
-		}
+	count = print(format, args);
 
-		if (format[i] == '%')
-		{
-			f = check_spec(&format[i + 1]);
-			if (f == NULL)
-			{
-				value = write(1, &format[i], 1);
-				count += value;
-				value = write(1, &format[i + 1], 1);
-				count += value;
-				i += 2;
-				continue;
-			}
-
-			if (f != NULL)
-			{
-				value = f(args);
-				count += value;
-				i += 2;
-				continue;
-			}
-
-			if (format[i + 1] == '\0')
-			{
-				break;
-			}
-
-			if (format[i + 1] != '\0')
-			{
-				value = write(1, &format[i + 1], 1);
-				count += value;
-				i += 2;
-				continue;
-			}
-		}
-	}
 	va_end(args);
 	return (count);
 }

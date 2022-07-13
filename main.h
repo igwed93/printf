@@ -7,7 +7,7 @@
 #include <stdlib.h>
 
 int _printf(const char *forrmat, ...);
-int (*check_spec(const char*))(va_list);
+int (*check_spec(const char *))(va_list);
 
 
 /**
@@ -30,6 +30,7 @@ int print_int(va_list);
 
 char *transform(unsigned int num, int base);
 int _puts(const char *s);
+int print(const char *format, va_list);
 
 int _putchar(char c);
 #endif
