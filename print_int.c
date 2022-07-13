@@ -9,8 +9,10 @@
  */
 int print_int(va_list args)
 {
-	unsigned int d = va_arg(args, int);
-	int count = 0;
+	int d = va_arg(args, int);
+	int count;
+
+	count = 0;
 
 	if (d < 0)
 	{

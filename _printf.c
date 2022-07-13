@@ -12,9 +12,9 @@ int _printf(const char *format, ...)
 	int count  = 0;
 	int i = 0;
 	va_list args;
+	int (*f)(va_list);
 
 	va_start(args, format);
-	int (*f)(va_list);
 
 	/* Prevent parsing a null pointer */
 	if (format == NULL)
@@ -34,6 +34,16 @@ int _printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			f = check_spec(&format[i + 1]);
+			if (f == NULL)
+			{
+				value = write(1, &format[i], 1);
+				count += value;
+				value = write(1, &format[i + 1], 1);
+				count += value;
+				i += 2;
+				continue;
+			}
+
 			if (f != NULL)
 			{
 				value = f(args);

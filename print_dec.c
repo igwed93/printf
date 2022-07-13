@@ -9,7 +9,7 @@
  */
 int print_dec(va_list args)
 {
-	unsigned int d = va_arg(args, int);
+	int d = va_arg(args, int);
 	int count = 0;
 
 	if (d < 0)
