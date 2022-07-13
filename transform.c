@@ -9,19 +9,17 @@
  */
 char *transform(unsigned int num, int base)
 {
-	static char Rep[] = "0123456789ABCDEF";
+	static const char Rep[] = "0123456789ABCDEF";
 	static char arr[50];
 	char *ptr;
 
 	ptr = &arr[49];
 	*ptr = '\0';
 
-	do
-	{
+	do {
 		*--ptr = Rep[num % base];
 		num /= base;
-	}while(num != 0);
+	} while (num != 0);
 
 	return (ptr);
 }
-	
